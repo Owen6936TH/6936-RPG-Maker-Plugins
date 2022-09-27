@@ -1,5 +1,4 @@
 /*:
- * @target MZ
  * @plugindesc [Version 1.1] [RPG Maker MV] Remove Many Things From Your Game
  * @author Owen6936
  * @help
