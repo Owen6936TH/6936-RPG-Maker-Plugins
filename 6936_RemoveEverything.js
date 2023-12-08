@@ -1,6 +1,8 @@
 /*:
- * @plugindesc [Version 1.2] [RPG Maker MV] Remove Many Things From Your Game
+ * @target MZ
+ * @plugindesc [Version 1.2] [RPG Maker MZ] Remove Many Things From Your Game
  * @author Owen6936
+ * @url https://store.steampowered.com/search/?developer=Owen6936
  * @help
  *
  * English Below
@@ -14,10 +16,10 @@
  * เพราะเกมแนวนี้ ที่ไม่มีความจำเป็นที่จะต้องแจ้งข้อมูลเหล่านั้นให้ผู้เล่นทราบ
  *  
  * ----- ข้อที่ควรรู้ -----
- * ปลั๊กอินนี้เป็นเวอร์ชั่นที่ทถูกสร้างมาเพื่อ RPG Maker MV และไม่สามารถใช้ได้ใน RPG Maker MZ ได้
- * หากต้องการใช้ปลั๊กอินนี้ในเวอร์ชั่น MZ ท่านสามารถดาวน์โหลดของเวอร์ชั่น MZ ได้ที่ https://github.com/Owen6936TH/6936-RPG-Maker-Plugin
- * 
- * ปลั๊กอินนี้ถูกออกแบบมาให้ช่วยลบข้อมูลต่าง ๆ ออกจากหน้า Menu
+  * ปลั๊กอินนี้เป็นเวอร์ชั่นที่ทถูกสร้างมาเพื่อ RPG Maker MZ และไม่สามารถใช้ได้ใน RPG Maker MV ได้
+ * เพราะ RPG Maker MZ คือ RM เวอร์ชั่นที่ดีที่สุด และอยู่เหนือ RM เวอร์ชั่นอื่นทั่วโลก
+ * หากต้องการใช้ปลั๊กอินนี้ในเวอร์ชั่น MV ท่านสามารถดาวน์โหลดของเวอร์ชั่น MV ได้ที่ https://github.com/Owen6936TH/6936-RPG-Maker-Plugin
+ * และปลั๊กอินนี้ถูกออกแบบมาให้ช่วยลบข้อมูลต่าง ๆ ออกจากหน้า Menu
  * ของเอนจิ้นแบบ Vanila (ไม่ได้มีการลงปลั๊กอินหรือถูกปรับแต่งอะไรเพิ่มเติม)
  * ทางผู้จัดทำไม่ขอรับประกันว่าปลั๊กอินนี้จะใช้ร่วมกับปลั๊กอินอื่นที่มีหน้าที่จัดการเกี่ยวกับหน้า Menu ได้หรือไม่
  *
@@ -27,12 +29,9 @@
  * ----- Parameter -----
  * Remove HP = ลบหลอด HP
  * Remove MP = ลบหลอด MP
- * Remove TP = ลบหลอด TP
  * Remove Class = ลบ Class
  * Remove Level = ลบ Level
  * Remove EXP Goal = ปิดการแสดงตัวเลข EXP ที่มีอยู่ และที่ต้องการเพื่อไปสู่เลเวลถัดไป ในหน้า Status
- * Remove Gold = ลบหน้าต่างแสดง Gold
- * Remove Weapon and Armor Category = ลบหมวดหมู่ อาวุธ และ ชุดเกราะ ออกจากหน้า Item
  * RemoveCommandRemember = ลบการตั้งค่า Command Rember ออกจากหน้าการตั้งค่า
  *
  * ----- Changelog -----
@@ -54,8 +53,8 @@
  * Because these game genre don't need to let player know these information
  *
  * -----  Things you should know -----
- * This plugin is works only in RPG Maker MV.
- * MZ Version is avaliable at https://github.com/Owen6936TH/6936-RPG-Maker-Plugins
+ * This plugin is works only in RPG Maker MZ.
+ * MV Version is avaliable at https://github.com/Owen6936TH/6936-RPG-Maker-Plugins
  *
  * This plugin is designed to help you remove any information from the Menu screen.
  * in vanila engine (no plugins or tweaks added)
@@ -134,7 +133,7 @@
 
 var _6936 = _6936 || {};
 _6936.RemoveEverything = _6936.RemoveEverything || {};
-_6936.RemoveEverything.parameters = PluginManager.parameters('6936_MV_RemoveEverything');
+_6936.RemoveEverything.parameters = PluginManager.parameters('6936_RemoveEverything');
 
 _6936.RemoveEverything.RemoveHP = (_6936.RemoveEverything.parameters["RemoveHP"] === "true");
 _6936.RemoveEverything.RemoveMP = (_6936.RemoveEverything.parameters["RemoveMP"] === "true");
@@ -143,41 +142,36 @@ _6936.RemoveEverything.RemoveClass = (_6936.RemoveEverything.parameters["RemoveC
 _6936.RemoveEverything.RemoveLevel = (_6936.RemoveEverything.parameters["RemoveLevel"] === "true");
 _6936.RemoveEverything.RemoveEXPGoal = (_6936.RemoveEverything.parameters["RemoveEXPGoal"] === "true");
 _6936.RemoveEverything.RemoveGold = (_6936.RemoveEverything.parameters["RemoveGold"] === "true");
-_6936.RemoveEverything.RemoveItemCategory = (_6936.RemoveEverything.parameters["RemoveItemCategory"] === "true");_6936.RemoveEverything.RemoveGold = (_6936.RemoveEverything.parameters["RemoveGold"] === "true");
+_6936.RemoveEverything.RemoveItemCategory = (_6936.RemoveEverything.parameters["RemoveItemCategory"] === "true");
 _6936.RemoveEverything.RemoveCommandRemember = (_6936.RemoveEverything.parameters["RemoveCommandRemember"] === "true");
 
-var _6936_RemoveEverything_Window_Base_drawActorHp = Window_Base.prototype.drawActorHp;
-var _6936_RemoveEverything_Window_Base_drawActorMp = Window_Base.prototype.drawActorMp;
-var _6936_RemoveEverything_Window_Base_drawActorTp = Window_Base.prototype.drawActorTp;
-var _6936_RemoveEverything_Window_StatusBase_drawActorClass = Window_Base.prototype.drawActorClass;
-var _6936_RemoveEverything_Window_StatusBase_drawActorLevel = Window_Base.prototype.drawActorLevel;
+
+var _6936_RemoveEverything_StatusBase_drawActorClass = Window_StatusBase.prototype.drawActorClass;
+var _6936_RemoveEverything_Window_StatusBase_drawActorLevel = Window_StatusBase.prototype.drawActorLevel;
 var _6936_RemoveEverything_Window_Status_drawExpInfo = Window_Status.prototype.drawExpInfo;
 var _6936_RemoveEverything_Scene_Menu_createGoldWindow = Scene_Menu.prototype.createGoldWindow;
 var _6936_RemoveEverything_Window_ItemCategory_maxCols = Window_ItemCategory.prototype.maxCols ;
 var _6936_RemoveEverything_Window_ItemCategory_makeCommandList = Window_ItemCategory.prototype.makeCommandList;
-//----- Remove HP MP TP -----
 
-Window_Base.prototype.drawActorHp = function(actor, x, y, width) {
-	if (!_6936.RemoveEverything.RemoveHP) {_6936_RemoveEverything_Window_Base_drawActorHp.call(this,actor, x, y, width)};
-};
+//----- Remove HP MP -----
 
-Window_Base.prototype.drawActorMp = function(actor, x, y, width) {
-	if (!_6936.RemoveEverything.RemoveMP) {_6936_RemoveEverything_Window_Base_drawActorMp.call(this,actor, x, y, width)};
-};
-
-Window_Base.prototype.drawActorTp = function(actor, x, y, width) {
-	if (!_6936.RemoveEverything.RemoveTP) {_6936_RemoveEverything_Window_Base_drawActorTp.call(this,actor, x, y, width)};
+Window_StatusBase.prototype.placeBasicGauges = function(actor, x, y) {
+	if (!_6936.RemoveEverything.RemoveHP) {this.placeGauge(actor, "hp", x, y)};
+	if (!_6936.RemoveEverything.RemoveMP) {this.placeGauge(actor, "mp", x, y + this.gaugeLineHeight())};
+    if ($dataSystem.optDisplayTp) {
+        this.placeGauge(actor, "tp", x, y + this.gaugeLineHeight() * 2);
+    }
 };
 
 //----- Remove Class -----
 
-Window_Base.prototype.drawActorClass = function(actor, x, y, width) {
-	if (!_6936.RemoveEverything.RemoveClass) {_6936_RemoveEverything_Window_StatusBase_drawActorClass.call(this,actor, x, y, width)}; 
+Window_StatusBase.prototype.drawActorClass = function(actor, x, y, width) {
+	if (!_6936.RemoveEverything.RemoveClass) {_6936_RemoveEverything_StatusBase_drawActorClass.call(this,actor, x, y, width)}; 
 };
 
 //----- Remove Level -----
 
-Window_Base.prototype.drawActorLevel = function(actor, x, y) {
+Window_StatusBase.prototype.drawActorLevel = function(actor, x, y) {
     if (!_6936.RemoveEverything.RemoveLevel) {_6936_RemoveEverything_Window_StatusBase_drawActorLevel.call(this,actor, x, y)}; 
 };
 
